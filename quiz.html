@@ -3,6 +3,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quiz EZD RP</title>
+  
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
   <style>
@@ -17,6 +18,11 @@
  <body data-template-id="__page-root" class="min-h-screen flex items-center justify-center p-4" style="background: linear-gradient(135deg, rgb(0, 52, 117), rgb(33, 46, 57));">
   <main class="w-full max-w-lg mx-auto"><!-- Start Screen -->
    <div id="start-screen" class="text-center fade-in">
+    <img
+        src="logo.png"
+        alt="Logo"
+        class="mx-auto mb-8 w-64 h-auto"
+    >
     <h1 data-template-id="quiz-title" class="canva-text text-3xl font-bold mb-4" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 32px;">Quiz: EZD RP</h1>
     <p data-template-id="quiz-subtitle" class="canva-text text-lg mb-8 opacity-80" style="color: rgb(203, 213, 224); font-weight: 400; font-style: normal; font-size: 16px;">Sprawdź swoją wiedzę o systemie EZD RP. 8 losowych pytań – prawda lub fałsz.</p><button data-template-id="start-button" class="canva-button px-8 py-3 rounded-lg font-medium text-lg transition hover:scale-105" onclick="startQuiz()" style="background: rgb(79, 209, 197); color: rgb(0, 52, 117); font-weight: 600; font-style: normal; font-size: 16px;">Rozpocznij quiz</button>
    </div><!-- Question Screen -->
@@ -39,6 +45,7 @@
     <p id="result-detail" class="text-lg opacity-70 mb-8" style="color:#cbd5e0"></p><button data-template-id="restart-button" class="canva-button px-8 py-3 rounded-lg font-medium text-lg transition hover:scale-105" onclick="startQuiz()" style="background: rgb(79, 209, 197); color: rgb(0, 52, 117); font-weight: 600; font-style: normal; font-size: 16px;">Zagraj ponownie</button>
    </div>
   </main>
+  
   <script src="/_sdk/b19ec5e9a6bcccbf.editing_sdk.js" integrity="sha512-zBJgQuXCQdyGFqXgZwfp8p9NowwbyuWhOK/NGHf9nps+IMSAyeeSyv3qhtfcnKWA9sWownxUevRqEhsjnjL55w=="></script>
   <script>
         const questions = [
