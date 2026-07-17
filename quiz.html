@@ -1,0 +1,116 @@
+ <!doctype html>
+<html lang="pl"><head><script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20260716-05-1ab63ad"}');</script><script src="/_sdk/f432b76fb310b513.telemetry_sdk.js" integrity="sha512-9FJQ55EKmmqhyyik8BhrMVfm0+iYYfb8uOlRsjtkxJMEI97qOVEI4PnHohDjQAtvAep0IOEpdQ64eki0sz62ug=="></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz EZD RP</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
+  <style>
+        body { font-family: 'DM Sans', sans-serif; }
+        .fade-in { animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  <script src="/_sdk/e3937a0574eb2d69.data_sdk.js" type="text/javascript" integrity="sha512-xbp/ACqEQy1aDxYMtXTrR3y5MUbzxuggRR/9sD48Gl4VhLMMCiAHsxMaFV6DTdeBpR6ymF+t2zhPKYkWM3+Jfw=="></script>
+  <script src="/_sdk/9432170dbd2ae0df.resizing_sdk.js" type="text/javascript" integrity="sha512-FeT+58sb1f9ejWPWFjCbJvTT+SDwGV+ngrHUnlO7TWEOoqwOLj6p256kO3vOL7DIWl1cIgrobiof8v2bOigwPg=="></script>
+ </head>
+ <body data-template-id="__page-root" class="min-h-screen flex items-center justify-center p-4" style="background: linear-gradient(135deg, rgb(0, 52, 117), rgb(33, 46, 57));">
+  <main class="w-full max-w-lg mx-auto"><!-- Start Screen -->
+   <div id="start-screen" class="text-center fade-in">
+    <h1 data-template-id="quiz-title" class="canva-text text-3xl font-bold mb-4" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 32px;">Quiz: EZD RP</h1>
+    <p data-template-id="quiz-subtitle" class="canva-text text-lg mb-8 opacity-80" style="color: rgb(203, 213, 224); font-weight: 400; font-style: normal; font-size: 16px;">Sprawdź swoją wiedzę o systemie EZD RP. 8 losowych pytań – prawda lub fałsz.</p><button data-template-id="start-button" class="canva-button px-8 py-3 rounded-lg font-medium text-lg transition hover:scale-105" onclick="startQuiz()" style="background: rgb(79, 209, 197); color: rgb(0, 52, 117); font-weight: 600; font-style: normal; font-size: 16px;">Rozpocznij quiz</button>
+   </div><!-- Question Screen -->
+   <div id="question-screen" class="hidden fade-in">
+    <div class="flex justify-between items-center mb-6"><span id="counter" data-template-id="counter-label" class="canva-text text-sm font-medium opacity-70" style="color: rgb(160, 174, 192);"></span> <span id="score-display" class="text-sm font-medium opacity-70" style="color:#a0aec0"></span>
+    </div>
+    <div class="rounded-xl p-8 mb-8" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1)">
+     <p id="question-text" class="text-xl font-medium leading-relaxed" style="color:#f0f4f8"></p>
+    </div>
+    <div id="feedback" class="text-center mb-6 h-8 font-medium text-lg"></div>
+    <div id="buttons" class="grid grid-cols-2 gap-4"><button data-template-id="btn-true" class="canva-button py-4 rounded-lg font-medium text-lg transition hover:scale-[1.02]" onclick="answer(true)" style="background: rgba(72, 187, 120, 0.15); color: rgb(104, 211, 145); font-weight: 600; font-style: normal; font-size: 16px;">Prawda</button> <button data-template-id="btn-false" class="canva-button py-4 rounded-lg font-medium text-lg transition hover:scale-[1.02]" onclick="answer(false)" style="background: rgba(245, 101, 101, 0.15); color: rgb(252, 129, 129); font-weight: 600; font-style: normal; font-size: 16px;">Fałsz</button>
+    </div>
+   </div><!-- Result Screen -->
+   <div id="result-screen" class="hidden text-center fade-in">
+    <div class="text-6xl mb-4">
+     🏆
+    </div>
+    <h2 data-template-id="result-heading" class="canva-text text-2xl font-bold mb-2" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 24px;">Twój wynik</h2>
+    <p id="result-score" class="text-4xl font-bold mb-2" style="color:#4fd1c5"></p>
+    <p id="result-detail" class="text-lg opacity-70 mb-8" style="color:#cbd5e0"></p><button data-template-id="restart-button" class="canva-button px-8 py-3 rounded-lg font-medium text-lg transition hover:scale-105" onclick="startQuiz()" style="background: rgb(79, 209, 197); color: rgb(0, 52, 117); font-weight: 600; font-style: normal; font-size: 16px;">Zagraj ponownie</button>
+   </div>
+  </main>
+  <script src="/_sdk/b19ec5e9a6bcccbf.editing_sdk.js" integrity="sha512-zBJgQuXCQdyGFqXgZwfp8p9NowwbyuWhOK/NGHf9nps+IMSAyeeSyv3qhtfcnKWA9sWownxUevRqEhsjnjL55w=="></script>
+  <script>
+        const questions = [
+            { q: "System EZD RP wspiera cyfryzację administracji.", a: true },
+            { q: "W EZD RP można prowadzić tylko sprawy w postaci elektronicznej.", a: false },
+            { q: "Każdy dokument elektroniczny wymaga własnoręcznego podpisu.", a: false },
+            { q: "Elektroniczny obieg dokumentów przyspiesza załatwianie spraw.", a: true },
+            { q: "EZD RP pomaga śledzić historię obiegu dokumentów.", a: true },
+            { q: "Sprawa w EZD RP może zawierać maksymalnie 20 dokumentów.", a: false },
+            { q: "EZD RP pozwala wyszukiwać dokumenty w papierowych teczkach.", a: false },
+            { q: "Metadane dokumentu pomagają w jego wyszukiwaniu i identyfikacji.", a: true },
+            { q: "W EZD RP można tworzyć projekty pism urzędowych.", a: true },
+            { q: "Jeden dokument elektroniczny może obsługiwać tylko jedna wyznaczona osoba.", a: false },
+            { q: "EZD RP pozwala sprawdzić, na jakim etapie jest realizacja sprawy.", a: true },
+            { q: "W EZD RP można swobodnie usuwać dokumenty.", a: false },
+            { q: "Użytkownik dodany do EZD RP może mieć tylko jedno stanowisko w systemie.", a: false },
+            { q: "KPO wspiera rozwój usług cyfrowych.", a: true },
+            { q: "Dokument elektroniczny zawsze trzeba wydrukować.", a: false },
+            { q: "EZD RP może pomóc zmniejszyć zużycie papieru.", a: true }
+        ];
+
+        let current = [], idx = 0, score = 0, waiting = false;
+
+        function shuffle(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function startQuiz() {
+            current = shuffle([...questions]).slice(0, 8);
+            idx = 0; score = 0;
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('result-screen').classList.add('hidden');
+            document.getElementById('question-screen').classList.remove('hidden');
+            document.getElementById('question-screen').classList.add('fade-in');
+            showQuestion();
+        }
+
+        function showQuestion() {
+            document.getElementById('question-text').textContent = current[idx].q;
+            document.getElementById('counter').textContent = `Pytanie ${idx + 1} / 8`;
+            document.getElementById('score-display').textContent = `Wynik: ${score}/${idx}`;
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('feedback').style.color = '';
+            waiting = false;
+        }
+
+        function answer(val) {
+            if (waiting) return;
+            waiting = true;
+            const correct = val === current[idx].a;
+            if (correct) score++;
+            const fb = document.getElementById('feedback');
+            fb.textContent = correct ? '✓ Dobrze!' : '✗ Źle!';
+            fb.style.color = correct ? '#68d391' : '#fc8181';
+            setTimeout(() => {
+                idx++;
+                if (idx < 8) { showQuestion(); }
+                else { showResult(); }
+            }, 1000);
+        }
+
+        function showResult() {
+            document.getElementById('question-screen').classList.add('hidden');
+            document.getElementById('result-screen').classList.remove('hidden');
+            document.getElementById('result-screen').classList.add('fade-in');
+            document.getElementById('result-score').textContent = `${score} / 8`;
+            document.getElementById('result-detail').textContent = score >= 7 ? 'Świetny wynik!' : score >= 5 ? 'Dobra robota!' : 'Spróbuj ponownie!';
+        }
+    </script>
+ 
+</body></html>
